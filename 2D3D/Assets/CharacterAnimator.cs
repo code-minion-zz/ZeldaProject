@@ -61,15 +61,15 @@ public class CharacterAnimator : MonoBehaviour {
 		}
 		set 
 		{
-			if (direction != value)
-			{
-				direction = value;
-				requireChange = true;
-				SetDirection();
-			}
+			lastDirection = direction;
+			direction = value;
 		}
 	}
 
+	EDirection lastDirection = EDirection.Invalid;
+	float timeFacingThisDirection =0f;
+	const float TIMETOMOVE = 0.5f;
+	Vector2 directionValue;
 	bool requireChange = false;
 
 	// Use this for initialization
@@ -81,25 +81,46 @@ public class CharacterAnimator : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (requireChange)
-		{			
-			animator.SetTrigger("ChangeState");
-			requireChange = false;
-		}
+//		if (requireChange)
+//		{			
+//			animator.SetTrigger("ChangeState");
+//			requireChange = false;
+//		}
 
 		if (Input.anyKeyDown || Input.anyKey)
 		{
-			EDirection newDirection = ParseInputDirection();
-			Direction = newDirection;
 
-			if (CurrentState == EAnimType.Idle)
+			EDirection newDirection = ParseInputDirection();
+//			if (newDirection == EDirection.Invalid)
+//			{
+//				CurrentState = EAnimType.Idle;
+//				SetSpeed(0f);
+//				return;
+//			}
+
+			if (newDirection == Direction)
 			{
-				if (StartWalking(newDirection))
+				timeFacingThisDirection += Time.smoothDeltaTime;
+				if (CurrentState == EAnimType.Idle)
 				{
-					// set animtype to walking
-					CurrentState = EAnimType.Walk;
+					if (timeFacingThisDirection > TIMETOMOVE)
+					{
+						// set animtype to walking
+						CurrentState = EAnimType.Walk;
+						SetSpeed(1f);
+					}
 				}
 			}
+			else
+			{
+				Direction = newDirection;
+				timeFacingThisDirection = 0f;
+			}
+
+			SetDirection();
+
+
+
 		}
 	}
 
@@ -114,21 +135,33 @@ public class CharacterAnimator : MonoBehaviour {
 	EDirection ParseInputDirection()
 	{
 		Vector2 inputDirection;
-		inputDirection.x = Input.GetAxis("Horizontal");
-		inputDirection.y = Input.GetAxis("Vertical");
+		inputDirection.x = Input.GetAxisRaw("Horizontal");
+		inputDirection.y = Input.GetAxisRaw("Vertical");
+
 		
+		if (inputDirection == Vector2.zero)
+		{
+			return EDirection.Invalid;
+		}
+
 		if (inputDirection.x > 0) // face right
 		{
 			if (inputDirection.y > 0)
 			{
+				directionValue.y = 1;
+				directionValue.x = 1;
 				return EDirection.Northeast;
 			}
 			else if (inputDirection.y < 0)
 			{
+				directionValue.y = -1;
+				directionValue.x = 1;
 				return EDirection.Southeast;
 			}
 			else
 			{
+				directionValue.y = 0;
+				directionValue.x = 1;
 				return EDirection.East;
 			}
 		}
@@ -136,14 +169,20 @@ public class CharacterAnimator : MonoBehaviour {
 		{
 			if (inputDirection.y > 0)
 			{
+				directionValue.y = 1;
+				directionValue.x = -1;
 				return EDirection.Northwest;
 			}
 			else if (inputDirection.y < 0)
 			{
+				directionValue.y = -1;
+				directionValue.x = -1;
 				return EDirection.Southwest;
 			}
 			else
 			{
+				directionValue.y = 0;
+				directionValue.x = -1;
 				return EDirection.West;
 			}			
 		}
@@ -151,10 +190,14 @@ public class CharacterAnimator : MonoBehaviour {
 		{
 			if (inputDirection.y > 0)
 			{
+				directionValue.y = 1;
+				directionValue.x = 0;
 				return EDirection.North;
 			}
 			else
 			{
+				directionValue.y = -1;
+				directionValue.x = 0;
 				return EDirection.South;
 			}
 		}
@@ -166,9 +209,14 @@ public class CharacterAnimator : MonoBehaviour {
 		animator.SetInteger("AnimType", (int)currentState);
 	}
 
+	void SetSpeed(float _speed)
+	{
+		animator.SetFloat("Speed", _speed);
+	}
+
 	void SetDirection()
 	{
-		Debug.Log(direction);
-		animator.SetInteger("Direction", (int)direction);
+		animator.SetFloat("MoveX", directionValue.x);
+		animator.SetFloat("MoveY", directionValue.y);
 	}
 }
