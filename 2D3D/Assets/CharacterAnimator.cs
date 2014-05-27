@@ -68,7 +68,7 @@ public class CharacterAnimator : MonoBehaviour {
 
 	EDirection lastDirection = EDirection.Invalid;
 	float timeFacingThisDirection =0f;
-	const float TIMETOMOVE = 0.5f;
+	const float TIMETOMOVE = 0.7f;
 	Vector2 directionValue;
 	bool requireChange = false;
 
@@ -87,16 +87,10 @@ public class CharacterAnimator : MonoBehaviour {
 //			requireChange = false;
 //		}
 
-		if (Input.anyKeyDown || Input.anyKey)
+		if (PlayerController.InputMovement())
 		{
 
 			EDirection newDirection = ParseInputDirection();
-//			if (newDirection == EDirection.Invalid)
-//			{
-//				CurrentState = EAnimType.Idle;
-//				SetSpeed(0f);
-//				return;
-//			}
 
 			if (newDirection == Direction)
 			{
@@ -118,8 +112,6 @@ public class CharacterAnimator : MonoBehaviour {
 			}
 
 			SetDirection();
-
-
 
 		}
 	}
@@ -218,5 +210,11 @@ public class CharacterAnimator : MonoBehaviour {
 	{
 		animator.SetFloat("MoveX", directionValue.x);
 		animator.SetFloat("MoveY", directionValue.y);
+	}
+	
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawLine(transform.position, Camera.main.transform.position);
 	}
 }
