@@ -68,7 +68,7 @@ public class CharacterAnimator : MonoBehaviour {
 
 	EDirection lastDirection = EDirection.Invalid;
 	float timeFacingThisDirection =0f;
-	const float TIMETOMOVE = 0.7f;
+	const float TIMETOMOVE = 0.3f;
 	Vector2 directionValue;
 	bool requireChange = false;
 

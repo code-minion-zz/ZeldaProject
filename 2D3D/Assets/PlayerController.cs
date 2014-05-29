@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
 	}
 
 	const float SPEEDSCALE = 300;
-	const float TIMETOMOVE = 0.7f;
+	const float TIMETOTOPSPEED = 0.5f;
 	const float AXIS_DEADZONE = 0.001f;
 	CharacterAnimator characterAnimator;
 	EDirection lastDirection = EDirection.Invalid;
@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
 	Vector2 directionValue;
 	Vector2 inputValue;
 	bool requireChange = false;
+	float MovementSpeed = 1.5f;
 	
 	// Use this for initialization
 	void Start () 
@@ -52,13 +53,12 @@ public class PlayerController : MonoBehaviour
 	{
 		if (InputMovement())
 		{
-			Debug.Log("moving");
 			// begin accelerating character
 			Vector3 movement = Vector3.zero;
 			movement.x = Input.GetAxis("Horizontal");
 			movement.z = Input.GetAxis("Vertical");
-			rigidbody.AddForce(movement.normalized * SPEEDSCALE * Time.smoothDeltaTime, ForceMode.Force);
-			Debug.Log("Velocity " + rigidbody.velocity.normalized);
+			rigidbody.AddForce(movement.normalized * SPEEDSCALE * MovementSpeed * Time.smoothDeltaTime, ForceMode.Force);
+//			Debug.Log("Velocity " + rigidbody.velocity);
 		}
 		else
 		{
