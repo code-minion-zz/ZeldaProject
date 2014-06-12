@@ -76,60 +76,63 @@ public class CharacterAnimator : MonoBehaviour {
 	void Start () 
 	{
 		animator = GetComponent<Animator>();
+		GetComponent<SpriteRenderer>().castShadows = true;
+		GetComponent<SpriteRenderer>().receiveShadows = true;
 	}
 	
-	// Update is called once per frame
-	void Update () 
-	{
-//		if (requireChange)
-//		{			
-//			animator.SetTrigger("ChangeState");
-//			requireChange = false;
+//	// Update is called once per frame
+//	void Update () 
+//	{
+////		if (requireChange)
+////		{			
+////			animator.SetTrigger("ChangeState");
+////			requireChange = false;
+////		}
+//
+//		if (PlayerController.InputMovement())
+//		{
+//
+//			EDirection newDirection = ParseInputDirection();
+//
+//			if (newDirection == Direction)
+//			{
+//				timeFacingThisDirection += Time.smoothDeltaTime;
+//				if (CurrentState == EAnimType.Idle)
+//				{
+//					if (timeFacingThisDirection > TIMETOMOVE)
+//					{
+//						// set animtype to walking
+//						CurrentState = EAnimType.Walk;
+//						SetSpeed(1f);
+//					}
+//				}
+//			}
+//			else
+//			{
+//				Direction = newDirection;
+//				timeFacingThisDirection = 0f;
+//			}
+//
+//			SetDirection();
+//
 //		}
+//	}
 
-		if (PlayerController.InputMovement())
-		{
+	public void UpdateDirection(Vector2 _input)
+	{
+		EDirection newDirection = ParseInputDirection(_input);
 
-			EDirection newDirection = ParseInputDirection();
-
-			if (newDirection == Direction)
-			{
-				timeFacingThisDirection += Time.smoothDeltaTime;
-				if (CurrentState == EAnimType.Idle)
-				{
-					if (timeFacingThisDirection > TIMETOMOVE)
-					{
-						// set animtype to walking
-						CurrentState = EAnimType.Walk;
-						SetSpeed(1f);
-					}
-				}
-			}
-			else
-			{
-				Direction = newDirection;
-				timeFacingThisDirection = 0f;
-			}
-
-			SetDirection();
-
-		}
+		SetDirection();
 	}
 
-	/// <summary>
-	/// When moving from idle state, stay idle if changing direction, else, move
-	/// </summary>
-	bool StartWalking(EDirection direction)
+	public void UpdateMovementSpeed(float _speed)
 	{
-		return (direction == Direction);
+		SetSpeed(_speed);
 	}
 
-	EDirection ParseInputDirection()
+	EDirection ParseInputDirection(Vector2 _inputDirection)
 	{
-		Vector2 inputDirection;
-		inputDirection.x = Input.GetAxisRaw("Horizontal");
-		inputDirection.y = Input.GetAxisRaw("Vertical");
-
+		Vector2 inputDirection = _inputDirection;
 		
 		if (inputDirection == Vector2.zero)
 		{

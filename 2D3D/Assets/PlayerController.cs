@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 	const float SPEEDSCALE = 300;
 	const float TIMETOTOPSPEED = 0.5f;
 	const float AXIS_DEADZONE = 0.001f;
-	CharacterAnimator characterAnimator;
+	public CharacterAnimator characterAnimator;
 	EDirection lastDirection = EDirection.Invalid;
 	float timeFacingThisDirection =0f;
 	Vector2 directionValue;
@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		characterAnimator = GetComponent<CharacterAnimator>();
 	}
 	
 	// Update is called once per frame
@@ -57,15 +56,36 @@ public class PlayerController : MonoBehaviour
 			Vector3 movement = Vector3.zero;
 			movement.x = Input.GetAxis("Horizontal");
 			movement.z = Input.GetAxis("Vertical");
-			rigidbody.AddForce(movement.normalized * SPEEDSCALE * MovementSpeed * Time.smoothDeltaTime, ForceMode.Force);
-//			Debug.Log("Velocity " + rigidbody.velocity);
+
+			if (rigidbody.velocity.magnitude < 1.5f)
+			{
+				rigidbody.AddForce(
+					movement.normalized * SPEEDSCALE * MovementSpeed * Time.smoothDeltaTime, 
+					ForceMode.Force
+					);
+			}
+
+			// send input to animator
+			Vector2 cartesian;
+
+			// GetAxis smooths keyboard input, resulting in a delay when inputs go from 1 to 0
+			//  this doesn't matter much in gameplay, but looks bad in the animator.
+			//  for this reason, we use GetAxisRaw for that instead.
+
+			//  TODO : This assumes keyboard input, test and address potential gamepad issues.
+			cartesian.x = Input.GetAxisRaw("Horizontal");
+			cartesian.y = Input.GetAxisRaw("Vertical");
+			characterAnimator.UpdateDirection(cartesian);
+			characterAnimator.UpdateMovementSpeed(1f);
 		}
 		else
 		{
 			// no movement this frame
+			characterAnimator.UpdateMovementSpeed(0f);
 		}
 	}
 		
+	// 
 	public static bool InputMovement()
 	{
 		float horizontal = Input.GetAxis("Horizontal");
