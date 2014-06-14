@@ -2,8 +2,18 @@
 using System.Collections;
 
 //[RequireComponent (typeof(CharacterAnimator))]
-public class PlayerController : MonoBehaviour 
+public class ActorController : MonoBehaviour 
 {
+	public enum EControledBy
+	{
+		Invalid = -1,
+		Human,
+		Computer,
+		Max
+	}
+
+	public EControledBy ControlledBy;
+
 	public enum EDirection
 	{
 		Invalid = -1,
@@ -41,7 +51,8 @@ public class PlayerController : MonoBehaviour
 	Vector2 inputValue;
 	bool requireChange = false;
 	float MovementSpeed = 1.5f;
-	
+	InputDevice input;
+
 	// Use this for initialization
 	void Start () 
 	{
