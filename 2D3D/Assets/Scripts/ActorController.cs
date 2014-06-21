@@ -61,38 +61,51 @@ public class ActorController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if (InputMovement())
+		switch (ControlledBy)
 		{
-			// begin accelerating character
-			Vector3 movement = Vector3.zero;
-			movement.x = Input.GetAxis("Horizontal");
-			movement.z = Input.GetAxis("Vertical");
-
-			if (rigidbody.velocity.magnitude < 1.5f)
+		case EControledBy.Human:
+		{
+			if (InputMovement())
 			{
-				rigidbody.AddForce(
-					movement.normalized * SPEEDSCALE * MovementSpeed * Time.smoothDeltaTime, 
-					ForceMode.Force
-					);
+				// begin accelerating character
+				Vector3 movement = Vector3.zero;
+				movement.x = Input.GetAxis("Horizontal");
+				movement.z = Input.GetAxis("Vertical");
+
+				if (rigidbody.velocity.magnitude < 1.5f)
+				{
+					rigidbody.AddForce(
+						movement.normalized * SPEEDSCALE * MovementSpeed * Time.smoothDeltaTime, 
+						ForceMode.Force
+						);
+				}
+
+				// send input to animator
+				Vector2 cartesian;
+
+				// GetAxis smooths keyboard input, resulting in a delay when inputs go from 1 to 0
+				//  this doesn't matter much in gameplay, but looks bad in the animator.
+				//  for this reason, we use GetAxisRaw for that instead.
+
+				//  TODO : This assumes keyboard input, test and address potential gamepad issues.
+				cartesian.x = Input.GetAxisRaw("Horizontal");
+				cartesian.y = Input.GetAxisRaw("Vertical");
+				characterAnimator.UpdateDirection(cartesian);
+				characterAnimator.UpdateMovementSpeed(1f);
 			}
-
-			// send input to animator
-			Vector2 cartesian;
-
-			// GetAxis smooths keyboard input, resulting in a delay when inputs go from 1 to 0
-			//  this doesn't matter much in gameplay, but looks bad in the animator.
-			//  for this reason, we use GetAxisRaw for that instead.
-
-			//  TODO : This assumes keyboard input, test and address potential gamepad issues.
-			cartesian.x = Input.GetAxisRaw("Horizontal");
-			cartesian.y = Input.GetAxisRaw("Vertical");
-			characterAnimator.UpdateDirection(cartesian);
-			characterAnimator.UpdateMovementSpeed(1f);
+			else
+			{
+				// no movement this frame
+				characterAnimator.UpdateMovementSpeed(0f);
+			}
 		}
-		else
+		break;
+		case EControledBy.Computer:
 		{
-			// no movement this frame
-			characterAnimator.UpdateMovementSpeed(0f);
+
+		}
+		break;
+
 		}
 	}
 		
@@ -105,6 +118,30 @@ public class ActorController : MonoBehaviour
 		vertical = Mathf.Abs(vertical) > AXIS_DEADZONE ? vertical : 0f;
 
 		return !((horizontal == 0) && (vertical == 0));
+	}
+
+	void OnCollisionEnter(Collision other)
+	{
+		if (other.gameObject.layer == LayerMask.NameToLayer("Default")) return;
+
+		if (other.gameObject.layer != gameObject.layer)
+		{
+			//if (other.transform.name == "feet")
+			if (ControlledBy == EControledBy.Computer)
+			{
+				// push!
+				Vector3 direction = -1 * (other.transform.position-transform.position);
+
+				rigidbody.AddForce(direction * 500);
+
+				Debug.Log(direction);
+			}
+//			else
+//			{
+//
+//			}
+		}
+		//Debug.Log("Collided with " + other.ToString());
 	}
 
 	void OnDrawGizmos()
