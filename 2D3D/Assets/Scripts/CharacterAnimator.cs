@@ -204,6 +204,11 @@ public class CharacterAnimator : MonoBehaviour {
 		animator.SetInteger("AnimType", (int)currentState);
 	}
 
+	void Sit()
+	{
+		animator.SetTrigger("Sit");
+	}
+
 	void SetSpeed(float _speed)
 	{
 		animator.SetFloat("Speed", _speed);

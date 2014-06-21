@@ -11,8 +11,18 @@ public class ActorController : MonoBehaviour
 		Computer,
 		Max
 	}
-
 	public EControledBy ControlledBy;
+
+	public enum ECharacterStatus
+	{
+		Normal = 0,
+		Slowed,
+		Sitting,
+		Stunned,
+		Frozen,
+		Dead,
+	}
+	public ECharacterStatus Status;
 
 	public enum EDirection
 	{
@@ -38,6 +48,24 @@ public class ActorController : MonoBehaviour
 		{
 			lastDirection = direction;
 			direction = value;
+		}
+	}
+	
+	bool CanMove
+	{
+		get
+		{
+			if (Status == ECharacterStatus.Normal)	return true;
+			else return false;
+		}
+	}
+	
+	bool CanChangeDirection
+	{
+		get
+		{
+			if (Status == ECharacterStatus.Normal)	return true;
+			else return false;
 		}
 	}
 
@@ -109,7 +137,25 @@ public class ActorController : MonoBehaviour
 		}
 	}
 		
-	// 
+	void Move (Vector2 direction)
+	{
+		if (CanMove)
+		{
+			if (rigidbody.velocity.magnitude < 1.5f)
+			{
+				rigidbody.AddForce(
+					direction.normalized * SPEEDSCALE * MovementSpeed * Time.smoothDeltaTime, 
+					ForceMode.Force
+					);
+			}
+		}
+
+		if (CanChangeDirection)
+		{
+
+		}
+	}
+
 	public static bool InputMovement()
 	{
 		float horizontal = Input.GetAxis("Horizontal");
