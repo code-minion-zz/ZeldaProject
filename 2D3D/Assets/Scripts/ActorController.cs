@@ -65,6 +65,9 @@ public class ActorController : MonoBehaviour
 		{
 		case EControledBy.Human:
 		{
+			if(Input.GetKey(KeyCode.Space)) {
+				characterAnimator.callJump();
+			}
 			if (InputMovement())
 			{
 				// begin accelerating character
@@ -116,7 +119,6 @@ public class ActorController : MonoBehaviour
 		float vertical = Input.GetAxis("Vertical");
 		horizontal = Mathf.Abs(horizontal) > AXIS_DEADZONE ? horizontal : 0f;
 		vertical = Mathf.Abs(vertical) > AXIS_DEADZONE ? vertical : 0f;
-
 		return !((horizontal == 0) && (vertical == 0));
 	}
 

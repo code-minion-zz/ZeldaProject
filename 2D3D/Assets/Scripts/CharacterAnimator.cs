@@ -118,6 +118,10 @@ public class CharacterAnimator : MonoBehaviour {
 //		}
 //	}
 
+	public void callJump() {
+		animator.SetTrigger("Jump");
+	}
+
 	public void UpdateDirection(Vector2 _input)
 	{
 		EDirection newDirection = ParseInputDirection(_input);
