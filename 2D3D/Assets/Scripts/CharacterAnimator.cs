@@ -223,10 +223,10 @@ public class CharacterAnimator : MonoBehaviour {
 		animator.SetFloat("MoveX", directionValue.x);
 		animator.SetFloat("MoveY", directionValue.y);
 	}
-	
-	void OnDrawGizmos()
-	{
-		Gizmos.color = Color.yellow;
-		Gizmos.DrawLine(transform.position, Camera.main.transform.position);
-	}
+//	
+//	void OnDrawGizmos()
+//	{
+//		Gizmos.color = Color.yellow;
+//		Gizmos.DrawLine(transform.position, Camera.main.transform.position);
+//	}
 }

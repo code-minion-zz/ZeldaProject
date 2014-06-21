@@ -93,36 +93,26 @@ public class ActorController : MonoBehaviour
 		{
 		case EControledBy.Human:
 		{
-			if(Input.GetKey(KeyCode.Space)) {
+			if(Input.GetKeyDown(KeyCode.Space)) {
 				characterAnimator.callJump();
 			}
 			if (InputMovement())
 			{
 				// begin accelerating character
-				Vector3 movement = Vector3.zero;
+				Vector2 movement = Vector3.zero;
 				movement.x = Input.GetAxis("Horizontal");
-				movement.z = Input.GetAxis("Vertical");
+				movement.y = Input.GetAxis("Vertical");
 
-				if (rigidbody.velocity.magnitude < 1.5f)
-				{
-					rigidbody.AddForce(
-						movement.normalized * SPEEDSCALE * MovementSpeed * Time.smoothDeltaTime, 
-						ForceMode.Force
-						);
-				}
+				Move (movement);
 
-				// send input to animator
-				Vector2 cartesian;
+//				if (rigidbody.velocity.magnitude < 1.5f)
+//				{
+//					rigidbody.AddForce(
+//						movement.normalized * SPEEDSCALE * MovementSpeed * Time.smoothDeltaTime, 
+//						ForceMode.Force
+//						);
+//				}
 
-				// GetAxis smooths keyboard input, resulting in a delay when inputs go from 1 to 0
-				//  this doesn't matter much in gameplay, but looks bad in the animator.
-				//  for this reason, we use GetAxisRaw for that instead.
-
-				//  TODO : This assumes keyboard input, test and address potential gamepad issues.
-				cartesian.x = Input.GetAxisRaw("Horizontal");
-				cartesian.y = Input.GetAxisRaw("Vertical");
-				characterAnimator.UpdateDirection(cartesian);
-				characterAnimator.UpdateMovementSpeed(1f);
 			}
 			else
 			{
@@ -142,20 +132,33 @@ public class ActorController : MonoBehaviour
 		
 	void Move (Vector2 direction)
 	{
+		if (CanChangeDirection)
+		{
+			transform.forward = new Vector3(direction.x, 0, direction.y);
+				
+			// send input to animator
+			Vector2 cartesian;
+			
+			// GetAxis smooths keyboard input, resulting in a delay when inputs go from 1 to 0
+			//  this doesn't matter much in gameplay, but looks bad in the animator.
+			//  for this reason, we use GetAxisRaw for that instead.
+			
+			//  TODO : This assumes keyboard input, test and address potential gamepad issues.
+			cartesian.x = Input.GetAxisRaw("Horizontal");
+			cartesian.y = Input.GetAxisRaw("Vertical");
+			characterAnimator.UpdateDirection(cartesian);
+		}
+
 		if (CanMove)
 		{
 			if (rigidbody.velocity.magnitude < 1.5f)
 			{
 				rigidbody.AddForce(
-					direction.normalized * SPEEDSCALE * MovementSpeed * Time.smoothDeltaTime, 
+					transform.forward * SPEEDSCALE * MovementSpeed * Time.smoothDeltaTime, 
 					ForceMode.Force
 					);
+				characterAnimator.UpdateMovementSpeed(1f);
 			}
-		}
-
-		if (CanChangeDirection)
-		{
-
 		}
 	}
 
