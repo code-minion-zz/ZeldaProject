@@ -151,9 +151,9 @@ public class ActorController : MonoBehaviour
 
 		if (CanMove)
 		{
-			if (rigidbody.velocity.magnitude < 1.5f)
+			if (GetComponent<Rigidbody>().velocity.magnitude < 1.5f)
 			{
-				rigidbody.AddForce(
+				GetComponent<Rigidbody>().AddForce(
 					transform.forward * SPEEDSCALE * MovementSpeed * Time.smoothDeltaTime, 
 					ForceMode.Force
 					);
@@ -183,7 +183,7 @@ public class ActorController : MonoBehaviour
 				// push!
 				Vector3 direction = -1 * (other.transform.position-transform.position);
 
-				rigidbody.AddForce(direction * 500);
+				GetComponent<Rigidbody>().AddForce(direction * 500);
 
 				Debug.Log(direction);
 			}
