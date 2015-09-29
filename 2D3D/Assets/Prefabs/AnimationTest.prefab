@@ -1,0 +1,501 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 54: {fileID: 5400000}
+  - 135: {fileID: 13500000}
+  - 114: {fileID: 11400000}
+  m_Layer: 8
+  m_Name: AnimationTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400002}
+  - 114: {fileID: 11400002}
+  m_Layer: 8
+  m_Name: Tilt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100004
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400004}
+  - 212: {fileID: 21200000}
+  - 95: {fileID: 9500000}
+  - 114: {fileID: 11400004}
+  - 114: {fileID: 11405426}
+  m_Layer: 8
+  m_Name: Sprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100006
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400006}
+  m_Layer: 8
+  m_Name: feet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400008}
+  - 114: {fileID: 11400006}
+  m_Layer: 8
+  m_Name: Facing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .5, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400002}
+  - {fileID: 400008}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &400002
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -.100000001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400004}
+  - {fileID: 400006}
+  m_Father: {fileID: 400000}
+  m_RootOrder: 0
+--- !u!4 &400004
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400002}
+  m_RootOrder: 0
+--- !u!4 &400006
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.100000001, y: 0, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400002}
+  m_RootOrder: 1
+--- !u!4 &400008
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400000}
+  m_RootOrder: 1
+--- !u!54 &5400000
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 1
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!95 &9500000
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2bd6f0a6cbaa3044ba6a6b278313629e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fefa0749c33e01140bcd59a05e4c56f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ControlledBy: 0
+  Status: 0
+  characterAnimator: {fileID: 11400004}
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e72ecd93157dbba41b667657070fdbf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe7807718fc06254c8338e8f98535e02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d9b5ec1ef2fd0c469a1ce17d83c60de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &11405426
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f69e35b7dac66549ab1a58c42ca7164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileset: {fileID: 2800000, guid: 0f07b257cc567484daa3abb73d3d4f3f, type: 3}
+  tileWidth: 96
+  tileHeight: 96
+  framesPerSecond: 6
+  animations:
+  - name: Idle
+    directions:
+    - name: North
+      frames:
+      - tileX: 0
+        tileY: 0
+      mirror: 0
+    - name: NorthEast
+      frames:
+      - tileX: 1
+        tileY: 0
+      mirror: 0
+    - name: East
+      frames:
+      - tileX: 2
+        tileY: 0
+      mirror: 0
+    - name: SouthEast
+      frames:
+      - tileX: 3
+        tileY: 0
+      mirror: 0
+    - name: South
+      frames:
+      - tileX: 4
+        tileY: 0
+      mirror: 0
+    - name: SouthWest
+      frames:
+      - tileX: 3
+        tileY: 0
+      mirror: 1
+    - name: West
+      frames:
+      - tileX: 2
+        tileY: 0
+      mirror: 1
+    - name: NorthWest
+      frames:
+      - tileX: 1
+        tileY: 0
+      mirror: 1
+  - name: Sitting
+    directions:
+    - name: North
+      frames:
+      - tileX: 5
+        tileY: 0
+      mirror: 0
+    - name: NorthEast
+      frames:
+      - tileX: 6
+        tileY: 0
+      mirror: 0
+    - name: East
+      frames:
+      - tileX: 7
+        tileY: 0
+      mirror: 0
+    - name: SouthEast
+      frames:
+      - tileX: 8
+        tileY: 0
+      mirror: 0
+    - name: South
+      frames:
+      - tileX: 9
+        tileY: 0
+      mirror: 0
+    - name: SouthWest
+      frames:
+      - tileX: 8
+        tileY: 0
+      mirror: 1
+    - name: West
+      frames:
+      - tileX: 7
+        tileY: 0
+      mirror: 1
+    - name: NorthWest
+      frames:
+      - tileX: 6
+        tileY: 0
+      mirror: 1
+  - name: Walking
+    directions:
+    - name: North
+      frames:
+      - tileX: 0
+        tileY: 1
+      - tileX: 1
+        tileY: 1
+      - tileX: 2
+        tileY: 1
+      - tileX: 3
+        tileY: 1
+      - tileX: 4
+        tileY: 1
+      - tileX: 5
+        tileY: 1
+      mirror: 0
+    - name: NorthEast
+      frames:
+      - tileX: 6
+        tileY: 1
+      - tileX: 7
+        tileY: 1
+      - tileX: 8
+        tileY: 1
+      - tileX: 9
+        tileY: 1
+      - tileX: 10
+        tileY: 1
+      - tileX: 11
+        tileY: 1
+      mirror: 0
+    - name: East
+      frames:
+      - tileX: 12
+        tileY: 1
+      - tileX: 13
+        tileY: 1
+      - tileX: 14
+        tileY: 1
+      - tileX: 15
+        tileY: 1
+      - tileX: 16
+        tileY: 1
+      - tileX: 17
+        tileY: 1
+      mirror: 0
+    - name: SouthEast
+      frames:
+      - tileX: 18
+        tileY: 1
+      - tileX: 19
+        tileY: 1
+      - tileX: 20
+        tileY: 1
+      - tileX: 21
+        tileY: 1
+      - tileX: 22
+        tileY: 1
+      - tileX: 23
+        tileY: 1
+      mirror: 0
+    - name: South
+      frames:
+      - tileX: 24
+        tileY: 1
+      - tileX: 25
+        tileY: 1
+      - tileX: 26
+        tileY: 1
+      - tileX: 27
+        tileY: 1
+      - tileX: 28
+        tileY: 1
+      - tileX: 29
+        tileY: 1
+      mirror: 0
+    - name: SouthWest
+      frames:
+      - tileX: 18
+        tileY: 1
+      - tileX: 19
+        tileY: 1
+      - tileX: 20
+        tileY: 1
+      - tileX: 21
+        tileY: 1
+      - tileX: 22
+        tileY: 1
+      - tileX: 23
+        tileY: 1
+      mirror: 1
+    - name: West
+      frames:
+      - tileX: 12
+        tileY: 1
+      - tileX: 13
+        tileY: 1
+      - tileX: 14
+        tileY: 1
+      - tileX: 15
+        tileY: 1
+      - tileX: 16
+        tileY: 1
+      - tileX: 17
+        tileY: 1
+      mirror: 1
+    - name: NorthWest
+      frames:
+      - tileX: 6
+        tileY: 1
+      - tileX: 7
+        tileY: 1
+      - tileX: 8
+        tileY: 1
+      - tileX: 9
+        tileY: 1
+      - tileX: 10
+        tileY: 1
+      - tileX: 11
+        tileY: 1
+      mirror: 1
+--- !u!135 &13500000
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: .200000003
+  m_Center: {x: 0, y: -.219999999, z: 0}
+--- !u!212 &21200000
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 2830b3cf4c97dfa49ba0d841c886e30f, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 0
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300016, guid: 0f07b257cc567484daa3abb73d3d4f3f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
